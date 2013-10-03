@@ -1,10 +1,12 @@
-var path = require('path');
+//var path = require('path');
 define({
-  "expr": /^cd/,
-  "fn": function(arg) {
-    console.log(arg[1]);
-    var newPath = path.resolve(this.cwd(), arg[1] );
-    this.chdir(newPath);
+  "name": "cd",
+  "tagLine": "Change working directory",
+  "parse": function(arg) {
+    return arg.replace(/^cd ?/,'');
+  },
+  "fn": function(pathArg) {
+    this.chdir(pathArg);
     this.exit();
   }
 });
